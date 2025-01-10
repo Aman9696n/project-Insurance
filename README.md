@@ -24,7 +24,7 @@ RUN:touch Dockerfile
 
 Add the following content to your Dockerfile:
 
-# Stage 1: Build the app
+
 FROM maven:3.8.4-openjdk-11-slim AS build
 WORKDIR /app
 ARG JAR_FILE=target/*.jar
@@ -33,7 +33,7 @@ RUN mvn dependency:go-offline
 COPY src ./src
 RUN mvn clean package -DskipTests
 
-# Stage 2: Run the application
+
 FROM openjdk:11-jre-slim
 WORKDIR /app
 COPY --from=build app/target/*.jar app.jar
